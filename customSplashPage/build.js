@@ -25,7 +25,7 @@
 
 //Import path and file system to access files
 const path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 const e = require('express');
 
 //Assets I want to copy over
@@ -71,7 +71,7 @@ ASSETS.map(asset => {
 
     //If the node module is installed
     if (fs.existsSync(from)) {
-        fs.createReadStream(from).pipe(fs.createWriteStream(to));
+	fs.copySync(from, to);
         console.log(`Build Process: '${asset}' Imported to Front-End Dependencies`)
      } //If the node module isnt installed
      else {
@@ -96,7 +96,7 @@ FONTS.map(asset => {
 
     //If the node module is installed
     if (fs.existsSync(from)) {
-        fs.createReadStream(from).pipe(fs.createWriteStream(to));
+	fs.copySync(from, to);
         console.log(`Build Process: '${asset}' Imported to Front-End Fonts`)
      } //If the node module isnt installed
      else {
